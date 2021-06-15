@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Body Color randomization</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        #bodytag
+        {
+            background-color:#2c2727;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id = "bodytag">
+    <button id ="buttontag">Switch Color</button>
+
+
+
+    <script>
+        /* You should make sure the HTML is read before accessing the HTML elements using JS, hence why
+        <script> tag is at the last part of the HTML */
+
+        function convert_to_hex(decimal)
+        // This function accepts a decimal number to convert to hexadecimal 
+        {
+            var hex_characters = ['A','B','C','D','E','F'];
+            var hex = [];
+            
+        
+            while(true)
+            {
+                moded_hex = decimal % 16;
+                if(moded_hex >= 10)
+                {
+                    hex.push(hex_characters[moded_hex % 10]);
+                }
+                else
+                {
+                    hex.push(moded_hex.toString());
+                }
+                decimal = Math.floor(decimal / 16);
+                if(decimal <= 0)
+                {
+                    break;
+                }
+        
+            }
+            
+           return hex.reverse().join('');
+        }
+        
+        function randomize(randomise) 
+        // This function will take a range and provide random int number from 0 to that range
+        {
+            return Math.floor(((Math.random()) * 1000) % (randomise + 1));
+        
+        }
+        
+        function actually_color()
+        {
+        // Generate a random Red, Green and blue color and convert to Hexadecimal
+            var red_shade = convert_to_hex(randomize(255));
+            var blue_shade = convert_to_hex(randomize(255));
+            var green_shade = convert_to_hex(randomize(255));
+        
+            // Combine all the colors to form hex value with '#' on front
+            var combined_color = "#"+red_shade+green_shade+blue_shade;
+        
+        
+            while(combined_color.length < 7)
+            // If there are fewer than 6 hex values with a '#' on front, add 0 at the end
+            {
+                pad = 0;
+                combined_color += pad.toString();
+            }
+            return combined_color;
+        
+        }
+        console.log(actually_color());
+        
+        // Fetch the elements using their id
+        let body = document.getElementById("bodytag");
+        let buttones = document.getElementById("buttontag");
+        
+        // Add a EventListener that responds to the click
+        buttones.addEventListener('click',function()
+        {
+            // Use CSS styling
+            body.style.backgroundColor = actually_color();
+            console.clear();
+            console.log(actually_color());
+        });
+        
+        
+        
+    </script>
+            
+</body>
+</html>

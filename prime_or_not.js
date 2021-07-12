@@ -1,7 +1,7 @@
 function prime_or_not(num)
 {
   let status = 1 /* 0 for not prime, 1 for prime */
-  if(!(num % 2 == 0) && num > 2) /* If a number is even and greater than 2, it is automatically composite */
+  if(!(num % 2 == 0) && num > 2) /* If a number is even and greater than 2, it is automatically not prime */
     {
       half_num = Math.floor(num / 2); /* If we have a number say 100, the biggest number we can hope that divides 100 is 50. 51 or greater number cannot divide 100 */
       for(i = 3; i <= half_num; i+= 2) /* Since half_num is calculated once and never changed, why recalculate it in each loop? /*
